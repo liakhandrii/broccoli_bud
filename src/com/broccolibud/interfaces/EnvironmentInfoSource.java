@@ -59,7 +59,7 @@ public interface EnvironmentInfoSource {
 	/**
 	 * This method is optional (return Secure if not implemented)
 	 * The method is used to provide security.
-	 * Secure - everything is ok.
+	 * Secure - everything is OK.
 	 * CloseDanger - turn off when security switch fires.
 	 * Insecure - turned off.
 	 * @return Secure, CloseDanger, Insecure
@@ -67,13 +67,22 @@ public interface EnvironmentInfoSource {
 	public SecurityCondition getSecurityConditions();
 	
 	/**
-	 * This method is used to get the secrity switch state
+	 * This method is used to get the security switch state
 	 * @return On, Off or Unavailable
 	 */
 	public DigitalDeviceState getSecuritySwitchState();
 	
-	
-	public double getCurrent();
+	/**
+	 * This method is optional and should return voltage of the system power source (120/220/230V for most countries)
+	 * Used to turn everything off when voltage value is unsuitable
+	 * @return double voltage or -404 if unimplemented
+	 */
 	public double getVoltage();
+	
+	/**
+	 * This method is optional and should return the overall system current power in amps
+	 * @return double current in amps or -404 if not implemented
+	 */
+	public double getCurrent();
 	
 }
