@@ -1,5 +1,5 @@
 # Broccoli bud
-This project are designed to run the simple home garden or grow box system. The aim of the project is to make an automated system that needs only one setup for each grow and manages light cycles, temperature, humidity and irrigation (in v.1.0)
+This project is designed to run the simple home garden or grow box system. The aim of the project is to make an automated system that needs only one setup for each grow and manages light cycles, temperature, humidity and irrigation (in v.1.0)
 
 Any contributions are welcome!
 
