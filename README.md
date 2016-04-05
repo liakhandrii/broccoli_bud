@@ -6,9 +6,13 @@ Any contributions are welcome!
 # Features
 
 Allow configuration
+
 Get environment info
+
 Respond to environment changes
+
 Provide security if needed
+
 Grow the plant with configuration
 
 # What's implemented now
