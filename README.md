@@ -17,7 +17,7 @@ Grow the plant with configuration
 
 # What's implemented now
 
-Nothing (actually, only interfaces and dummy info source)
+Nothing (actually, only interfaces)
 
 # Goals 
 
