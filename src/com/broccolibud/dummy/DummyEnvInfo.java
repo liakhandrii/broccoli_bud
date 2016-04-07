@@ -11,7 +11,19 @@ import com.broccolibud.interfaces.EnvironmentInfoSource;
 public class DummyEnvInfo implements EnvironmentInfoSource {
 	
 	public static Random r = new Random();
-	public int tankState;
+	
+	// state of digital devices change here
+	
+	boolean mainLight = true;
+	boolean sideLight = true;
+	boolean mainVentilation = true;
+	boolean additionVentilation = true;
+	boolean securitySwitch = true;
+	
+	// state of security conditions change here
+	
+	boolean securityConditions = true;
+	
 	@Override
 	public double getTemperature() {
 		//generating random double of temperature from 18°C to 40°C
@@ -40,23 +52,28 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 	@Override
 	public DigitalDeviceState getMainLightState() {
 		
-		return null;//should be on || off
+		if(mainLight == true) {return DigitalDeviceState.On;}
+		else if (mainLight == false) {return DigitalDeviceState.Off;}
+		else {return DigitalDeviceState.Unavailable;}
+		
+		//should be On || Off || Unavaliable
 	}
 
 	@Override
 	public DigitalDeviceState getSideLightState() {
 		
-		return null;//should be on || off
+		if(sideLight == true){return DigitalDeviceState.On;}
+		else if (sideLight == false){return DigitalDeviceState.Off;}
+		else{return DigitalDeviceState.Unavailable;}
+		
+		//should be On || Off || Unavaliable
 	}
 
 	@Override
 	public WaterTankState getWaterTankState() {
+		
 		int tank = 100;
 		int tankCondition = 0;
-		
-		int full = 1;
-		int poor = 2;
-		int empty = 3;
 		
 		tankCondition = tank - r.nextInt(100);
 		
@@ -68,37 +85,56 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 
 	@Override
 	public SoilWaterState getSoilWaterState() {
+		
 		int tank = 100;
 		int tankCondition = 0;
 		
 		tankCondition = tank - r.nextInt(100);
 		
+		if(tankCondition == tank){return SoilWaterState.Wet;}
+		else{return SoilWaterState.Dry;}
 		
-		return null;//should be full || poor || empty
+		//should be Wet || Dry
 	}
 
 	@Override
 	public DigitalDeviceState getMainVentilationState() {
 		
-		return null;//should be on || off
+		if(mainVentilation == true) {return DigitalDeviceState.On;}
+		else if (mainVentilation == false) {return DigitalDeviceState.Off;}
+		else {return DigitalDeviceState.Unavailable;}
+		
+		//should be On || Off || Unavaliable 
 	}
 
 	@Override
 	public DigitalDeviceState getAdditionalVentilationState() {
 		
-		return null;//should be on || off
+		if(additionVentilation == true) {return DigitalDeviceState.On;}
+		else if (additionVentilation == false) {return DigitalDeviceState.Off;}
+		else {return DigitalDeviceState.Unavailable;}
+		
+		//should be On || Off || Unavaliable
 	}
 
 	@Override
 	public SecurityCondition getSecurityConditions() {
 		
-		return null;//should be on || off
+		if(securityConditions == true) {return SecurityCondition.Secure;}
+		else if (securityConditions == false) {return SecurityCondition.Insecure;}
+		else {return SecurityCondition.CloseDanger;}
+		
+		//should be CloseDanger || Insecure || Secure
 	}
 
 	@Override
 	public DigitalDeviceState getSecuritySwitchState() {
 		
-		return null;//should be on || off
+		if(securitySwitch == true) {return DigitalDeviceState.On;}
+		else if (securitySwitch == false) {return DigitalDeviceState.Off;}
+		else {return DigitalDeviceState.Unavailable;}
+		
+		//should be On || Off || Unavaliable
 	}
 
 	@Override
