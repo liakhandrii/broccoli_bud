@@ -9,12 +9,20 @@ import java.util.Properties;
 
 public class HerbGrowProperties {
 	
+	private static HerbGrowProperties instance = new HerbGrowProperties();
+	
 	private Properties props;
 	private String fileName = "conf/grow-config.properties";
 	
-	public HerbGrowProperties() throws Exception {
+	private HerbGrowProperties() {
+		
 		props = new Properties();
-		loadFromFile();
+		
+		try {
+			loadFromFile();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void loadFromFile() throws Exception {
@@ -134,6 +142,10 @@ public class HerbGrowProperties {
 	
 	public double getPumpSpeed() {
 		return Double.parseDouble(props.getProperty("pump_speed"));
+	}
+	
+	public static HerbGrowProperties sharedInstance() {
+		return instance;
 	}
 
 }

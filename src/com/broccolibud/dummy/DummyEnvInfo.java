@@ -63,7 +63,7 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 		if(tankCondition == tank){tankState = full;}
 		else if(tankCondition == (tank/2)){tankState = poor;}
 		else{tankState = empty;}
-		return tankState;//should be full || poor || empty
+		return WaterTankState.Full;//should be full || poor || empty
 	}
 
 	@Override
