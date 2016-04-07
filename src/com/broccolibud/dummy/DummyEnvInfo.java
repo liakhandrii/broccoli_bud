@@ -10,62 +10,72 @@ import com.broccolibud.interfaces.EnvironmentInfoSource;
 
 public class DummyEnvInfo implements EnvironmentInfoSource {
 	
-	public static Random r = new Random();
+	private double temperature = 20;
+	private double humidity = 0.3;
+	
+	private static Random r = new Random();
 	
 	// state of digital devices change here
 	
-	boolean mainLight = true;
-	boolean sideLight = true;
-	boolean mainVentilation = true;
-	boolean additionVentilation = true;
-	boolean securitySwitch = true;
+	private boolean mainLight = true;
+	private boolean sideLight = true;
+	private boolean mainVentilation = true;
+	private boolean additionVentilation = true;
+	private boolean securitySwitch = true;
 	
 	// state of security conditions change here
 	
-	boolean securityConditions = true;
+	private boolean securityConditions = true;
+	
+	private int rDataGen(){
+		int i = r.nextInt(3);
+		switch(i){
+		case 1: return 1;
+		case 2: return 0;
+		case 3: return -1;
+		}
+		return 0;
+	}
+	
+	private static DigitalDeviceState stateCheck(boolean a){
+		if(a == true) {return DigitalDeviceState.On;}
+		else if (a == false) {return DigitalDeviceState.Off;}
+		else {return DigitalDeviceState.Unavailable;}
+		
+	}
 	
 	@Override
 	public double getTemperature() {
-		//generating random double of temperature from 18°C to 40°C
-		double temperature = 0.0;
-		
-		double minT = 18.0;
-		double maxT = 40.0;
-		
-		temperature = minT + (maxT - minT) * r.nextDouble();
+		temperature =  temperature + rDataGen() ;
 		return temperature;// + "°C"
 		
 	}
 
 	@Override
 	public double getHumidity() {
-		//generating random double of humidity from 0% to 100%
-		double humidity = 0.0;
-		
-		double minH = 0.0;
-		double maxH = 1.0;
-		
-		humidity = (minH + (maxH - minH) * r.nextDouble())*100;
+		humidity = humidity + (rDataGen())/100;
 		return humidity;// + "%"
 	}
 
 	@Override
 	public DigitalDeviceState getMainLightState() {
-		
+		/*
 		if(mainLight == true) {return DigitalDeviceState.On;}
 		else if (mainLight == false) {return DigitalDeviceState.Off;}
 		else {return DigitalDeviceState.Unavailable;}
-		
+		*/
+		return stateCheck(mainLight);
 		//should be On || Off || Unavaliable
 	}
 
 	@Override
 	public DigitalDeviceState getSideLightState() {
-		
+		/*
 		if(sideLight == true){return DigitalDeviceState.On;}
 		else if (sideLight == false){return DigitalDeviceState.Off;}
 		else{return DigitalDeviceState.Unavailable;}
-		
+		*/
+		return stateCheck(sideLight);
 		//should be On || Off || Unavaliable
 	}
 
@@ -77,10 +87,10 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 		
 		tankCondition = tank - r.nextInt(100);
 		
-		if(tankCondition == tank){tankState = full;}
-		else if(tankCondition == (tank/2)){tankState = poor;}
-		else{tankState = empty;}
-		return WaterTankState.Full;//should be full || poor || empty
+		if(tankCondition == tank) {return WaterTankState.Full;}
+		else {return WaterTankState.Empty;}
+		
+		//should be Full || Empty
 	}
 
 	@Override
@@ -99,21 +109,23 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 
 	@Override
 	public DigitalDeviceState getMainVentilationState() {
-		
+		/*
 		if(mainVentilation == true) {return DigitalDeviceState.On;}
 		else if (mainVentilation == false) {return DigitalDeviceState.Off;}
 		else {return DigitalDeviceState.Unavailable;}
-		
+		*/
+		return stateCheck(mainVentilation);
 		//should be On || Off || Unavaliable 
 	}
 
 	@Override
 	public DigitalDeviceState getAdditionalVentilationState() {
-		
+		/*
 		if(additionVentilation == true) {return DigitalDeviceState.On;}
 		else if (additionVentilation == false) {return DigitalDeviceState.Off;}
 		else {return DigitalDeviceState.Unavailable;}
-		
+		*/
+		return stateCheck(additionVentilation);
 		//should be On || Off || Unavaliable
 	}
 
@@ -129,11 +141,12 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 
 	@Override
 	public DigitalDeviceState getSecuritySwitchState() {
-		
+		/*
 		if(securitySwitch == true) {return DigitalDeviceState.On;}
 		else if (securitySwitch == false) {return DigitalDeviceState.Off;}
 		else {return DigitalDeviceState.Unavailable;}
-		
+		*/
+		return stateCheck(securitySwitch);
 		//should be On || Off || Unavaliable
 	}
 
@@ -148,5 +161,6 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 		
 		return 0;
 	}
-
+	
+	
 }
