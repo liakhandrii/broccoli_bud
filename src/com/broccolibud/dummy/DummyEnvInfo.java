@@ -7,11 +7,12 @@ import com.broccolibud.enums.SecurityCondition;
 import com.broccolibud.enums.SoilWaterState;
 import com.broccolibud.enums.WaterTankState;
 import com.broccolibud.interfaces.EnvironmentInfoSource;
+import com.broccolibud.interfaces.EnvironmentRegulator;
 
-public class DummyEnvInfo implements EnvironmentInfoSource {
+public class DummyEnvInfo implements EnvironmentInfoSource, EnvironmentRegulator  {
 	
 	private double temperature = 20;
-	private double humidity = 0.3;
+	private double humidity = 30;
 	
 	private static Random r = new Random();
 	
@@ -19,7 +20,7 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 	
 	private boolean mainLight = true;
 	private boolean sideLight = true;
-	private boolean mainVentilation = true;
+	private boolean mainVentilation = false;
 	private boolean additionVentilation = true;
 	private boolean securitySwitch = true;
 	
@@ -28,16 +29,23 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 	private boolean securityConditions = true;
 	
 	private int rDataGen(){
-		int i = r.nextInt(3);
+		int i = r.nextInt(10);
 		switch(i){
-		case 1: return 1;
-		case 2: return 0;
+		case 1: return 0;
+		case 2: return 1;
 		case 3: return -1;
+		case 4: return 1;
+		case 5: return 0;
+		case 6: return 1;
+		case 7: return -1;
+		case 8: return 1;
+		case 9: return -1;
+		case 10: return 0;
 		}
 		return 0;
 	}
 	
-	private static DigitalDeviceState stateCheck(boolean a){
+	private DigitalDeviceState stateCheck(boolean a){
 		if(a == true) {return DigitalDeviceState.On;}
 		else if (a == false) {return DigitalDeviceState.Off;}
 		else {return DigitalDeviceState.Unavailable;}
@@ -46,15 +54,24 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 	
 	@Override
 	public double getTemperature() {
-		temperature =  temperature + rDataGen() ;
+		temperature += mainVentilation ? -Math.abs(rDataGen()) : rDataGen();
+		
+		if (temperature > 30) {
+			mainVentilation = true;
+		} else if (temperature < 24) {
+			mainVentilation = false;
+		}else{
+			mainVentilation = true;
+		}
+		
 		return temperature;// + "°C"
 		
 	}
 
 	@Override
 	public double getHumidity() {
-		humidity = humidity + (rDataGen())/100;
-		return humidity;// + "%"
+		humidity = humidity + (rDataGen());
+		return humidity;
 	}
 
 	@Override
@@ -160,6 +177,42 @@ public class DummyEnvInfo implements EnvironmentInfoSource {
 	public double getCurrent() {
 		
 		return 0;
+	}
+
+	@Override
+	public void toggleMainLights(boolean on) {
+		// TODO Auto-generated method stub
+		mainLight = on;
+	}
+
+	@Override
+	public void toggleSideLights(boolean on) {
+		// TODO Auto-generated method stub
+		sideLight = on;
+	}
+
+	@Override
+	public void pumpWater(int milliliters) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void toggleMainVentiltion(boolean on) {
+		// TODO Auto-generated method stub
+		mainVentilation = on;
+	}
+
+	@Override
+	public void toggleAdditionalVentilation(boolean on) {
+		// TODO Auto-generated method stub
+		additionVentilation = on;
+	}
+
+	@Override
+	public void performSecurityActions() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
