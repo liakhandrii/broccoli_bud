@@ -1,4 +1,4 @@
-﻿//JavaScript, use pictures as buttons, sends and receives values to/from the Rpi
+//JavaScript, use pictures as buttons, sends and receives values to/from the Rpi
 //These are all the buttons
 var b0 = 24;
 var b1 = 27;
