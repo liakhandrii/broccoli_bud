@@ -17,8 +17,8 @@
 	define("PUMP_TIMEOUT", ceil(60 * 60 * 24 / WATERINGS_PER_DAY));
 	
 	# volume in mililiters
-	define("WATER_AMOUNT", 300)
-	define("PUMPING_TIME", ceil(300 / 14))
+	define("WATER_AMOUNT", 300);
+	define("PUMPING_TIME", ceil(300 / 14));
 	
 	define("MODE_AUTO", 228);
 	define("MODE_MANUAL", 322);
