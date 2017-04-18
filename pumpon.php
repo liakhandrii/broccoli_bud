@@ -8,7 +8,7 @@ function water_plant() {
 	exec('/usr/local/bin/gpio mode '.PUMP.' out');
 	exec('/usr/local/bin/gpio write '.PUMP.' 0');
 
-	sleep(35);
+	sleep(21);
 
 	exec('/usr/local/bin/gpio write '.PUMP.' 1');
 }
