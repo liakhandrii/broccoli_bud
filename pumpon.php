@@ -1,6 +1,6 @@
 <?php 
 
-include 'pins.php';
+include 'grow_settings.php';
 
 date_default_timezone_set("Europe/Kiev");
 
@@ -8,7 +8,7 @@ function water_plant() {
 	exec('/usr/local/bin/gpio mode '.PUMP.' out');
 	exec('/usr/local/bin/gpio write '.PUMP.' 0');
 
-	sleep(21);
+	sleep(PUMPING_TIME);
 
 	exec('/usr/local/bin/gpio write '.PUMP.' 1');
 }
