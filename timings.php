@@ -14,7 +14,7 @@ date_default_timezone_set("Europe/Kiev");
 	);
 	$flower_timings =  array(
 		WARM_LED => array(9, 21),
-		COLD_LED => array(9, 21),
+		COLD_LED => array(9, 10),
 		FITO_LED => array(9, 21),
 		FAN => array(9, 21)
 	);
