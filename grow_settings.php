@@ -6,8 +6,8 @@
 	// define("CYCLE", VEGETATION);
 	define("CYCLE", FLOWERING);
 
-	define("WARM_LED", 24);
-	define("COLD_LED", 27);
+	define("WARM_LED", 27);
+	define("COLD_LED", 24);
 	define("FITO_LED", 25);
 	define("FAN", 28);
 	define("PUMP", 29);
