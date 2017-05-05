@@ -13,12 +13,12 @@
 	define("PUMP", 29);
 	
 	# twice a day
-	define("WATERINGS_PER_DAY", 2);
+	define("WATERINGS_PER_DAY", 8);
 	define("PUMP_TIMEOUT", ceil(60 * 60 * 24 / WATERINGS_PER_DAY));
 	
 	# volume in mililiters
-	define("WATER_AMOUNT", 300);
-	define("PUMPING_TIME", ceil(300 / 14));
+	define("WATER_AMOUNT", 150);
+	define("PUMPING_TIME", ceil(WATER_AMOUNT / 14));
 	
 	define("MODE_AUTO", 228);
 	define("MODE_MANUAL", 322);
