@@ -153,7 +153,7 @@ mysqli_close($conn);
 				if (mysqli_num_rows($result) > 0) {
 				    // output data of each row
 				    while($row = mysqli_fetch_assoc($result)) {
-				        echo $row["light"];
+				        echo $row["light"] / 1000;
 				    }
 				} else {
 				    echo "0 results";
@@ -168,8 +168,8 @@ mysqli_close($conn);
 
 				        var options = {
 				          width: 400, height: 200,
-				          redFrom: 0, redTo: 30000,
-				          yellowFrom:30000, yellowTo: 65000,
+				          redFrom: 0, redTo: 30,
+				          yellowFrom:30, yellowTo: 65,
 				          minorTicks: 5
 				        };
 
@@ -247,7 +247,7 @@ mysql_select_db("datalogger");
 $q=   "select * from datalogger ";
 $q=$q."where sensor = ".$_GET["sensor"]." ";
 $q=$q."order by date_time desc ";
-$q=$q."limit 60";
+$q=$q."limit 1440";
 $ds=mysql_query($q);
 
 while($r = mysql_fetch_object($ds))
@@ -260,7 +260,7 @@ while($r = mysql_fetch_object($ds))
         ]);
 
 	var options = {
-	title: 'HUMIDITY LAST HOUR',
+	title: 'ROOM HUMIDITY LAST DAY',
 	curveType: 'function',
 	legend: { position: 'none' },
 	hAxis: { textPosition: 'none', direction: '-1' },
@@ -287,7 +287,7 @@ mysql_select_db("datalogger");
 $q=   "select * from datalogger ";
 $q=$q."where sensor = ".$_GET["sensor"]." ";
 $q=$q."order by date_time desc ";
-$q=$q."limit 60";
+$q=$q."limit 1440";
 $ds=mysql_query($q);
 
 while($r = mysql_fetch_object($ds))
@@ -300,7 +300,7 @@ while($r = mysql_fetch_object($ds))
         ]);
 
 	var options = {
-	title: 'TEMP LAST HOUR',
+	title: 'ROOM TEMP LAST HOUR',
 	curveType: 'function',
 	legend: { position: 'none' },
 	hAxis: { textPosition: 'none', direction: '-1' },
