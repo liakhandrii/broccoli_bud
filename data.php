@@ -112,18 +112,74 @@ mysqli_close($conn);
 
 		        var options = {
 		          width: 400, height: 200,
-		          redFrom: 26.6, redTo: 100,
-		          yellowFrom:20, yellowTo: 25.5,
+		          redFrom: 30, redTo: 100,
+		          yellowFrom:25, yellowTo: 30,
 		          minorTicks: 5
 		        };
 
-		        var chart = new google.visualization.Gauge(document.getElementById('charttemp_div'));
+		        var chart = new google.visualization.Gauge(document.getElementById('charttempgrow_div'));
 
 		        chart.draw(data, options);
 
 
 		      }
 		    </script>
+
+				<!-- VIV 1 INSIDE LIGHT GAUGE -->
+
+				    <script type="text/javascript">
+				      google.load("visualization", "1", {packages:["gauge"]});
+				      google.setOnLoadCallback(drawChart);
+				      function drawChart() {
+
+				        var data = google.visualization.arrayToDataTable([
+				          ['Label', 'Value'],
+				          ['LIGHT LUX', <?php
+				$servername = "localhost";
+				$username = "datalogger";
+				$password = "datalogger";
+				$dbname = "datalogger";
+
+				// Create connection
+				$conn = mysqli_connect($servername, $username, $password, $dbname);
+				// Check connection
+				if (!$conn) {
+				    die("Connection failed: " . mysqli_connect_error());
+				}
+
+				$sql = "SELECT roomtemp FROM light_and_roomtemp LIMIT 1";
+				$result = mysqli_query($conn, $sql);
+
+				if (mysqli_num_rows($result) > 0) {
+				    // output data of each row
+				    while($row = mysqli_fetch_assoc($result)) {
+				        echo $row["roomtemp"];
+				    }
+				} else {
+				    echo "0 results";
+				}
+
+				mysqli_close($conn);
+				?>
+
+				],
+
+				        ]);
+
+				        var options = {
+				          width: 400, height: 200,
+				          redFrom: 0, redTo: 30000,
+				          yellowFrom:30000, yellowTo: 65000,
+				          minorTicks: 5
+				        };
+
+				        var chart = new google.visualization.Gauge(document.getElementById('chartlight_div'));
+
+				        chart.draw(data, options);
+
+
+				      }
+				    </script>
 
 <!-- VIV 1 HUM GAUGE -->
     <script type="text/javascript">
@@ -267,17 +323,29 @@ while($r = mysql_fetch_object($ds))
 </div>
 </div>
 <div class="container">
-<h3>CURRENT CONDITIONS</h3>
+<h3>ROOM CONDITIONS</h3>
   <div class="row">
     <div class="col-sm-3">
-    <div id="charttemp_div" style="width: 200px; height: 200px;"></div>
+		<div id="charttemp_div" style="width: 200px; height: 200px;"></div>
     </div>
     <div class="col-sm-3">
     <div id="charthum_div" style="width: 200px; height: 200px;"></div>
     </div>
-    </div>
+  </div>
 <hr>
+</div>
+<div class="container">
+<h3>GROWBOX CONDITIONS</h3>
+  <div class="row">
+    <div class="col-sm-3">
+		<div id="charttempgrow_div" style="width: 200px; height: 200px;"></div>
     </div>
+    <div class="col-sm-3">
+    <div id="chartlight_div" style="width: 200px; height: 200px;"></div>
+    </div>
+  </div>
+<hr>
+</div>
 <div class="container">
     <div id="chart2_div" style="width: auto; height: 500px;"></div>
     <div id="chart_div" style="width: auot; height: 500px;"></div><hr>
