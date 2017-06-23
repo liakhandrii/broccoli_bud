@@ -3,8 +3,8 @@
 	define("FLOWERING", 420);
 	define("VEGETATION", 1620);
 	
-	// define("CYCLE", VEGETATION);
-	define("CYCLE", FLOWERING);
+	define("CYCLE", VEGETATION);
+	// define("CYCLE", FLOWERING);
 
 	define("WARM_LED", 27);
 	define("COLD_LED", 24);
