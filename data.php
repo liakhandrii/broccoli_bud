@@ -278,19 +278,19 @@ while($r = mysql_fetch_object($ds))
 		      google.setOnLoadCallback(drawChart);
 		      function drawChart() {
 		        var data = google.visualization.arrayToDataTable([
-		          ['TIME', 'HUMIDITY', ],
+		          ['TIME', 'TEMP', ],
 		<?php
 		$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error");
 		mysql_select_db("datalogger");
 
 		$q=   "select * from light_and_roomtemp ";
-		$q=$q."order by timestamp desc ";
+		$q=$q."order by time desc ";
 		$q=$q."limit 1440";
 		$ds=mysql_query($q);
 
 		while($r = mysql_fetch_object($ds))
 		{
-			echo "['".$r->timestamp."', ";
+			echo "['".$r->time."', ";
 			echo " ".$r->roomtemp." ],";
 
 		}
@@ -316,19 +316,19 @@ while($r = mysql_fetch_object($ds))
 						      google.setOnLoadCallback(drawChart);
 						      function drawChart() {
 						        var data = google.visualization.arrayToDataTable([
-						          ['TIME', 'HUMIDITY', ],
+						          ['TIME', 'LIGHT', ],
 						<?php
 						$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error");
 						mysql_select_db("datalogger");
 
 						$q=   "select * from light_and_roomtemp ";
-						$q=$q."order by timestamp desc ";
+						$q=$q."order by time desc ";
 						$q=$q."limit 1440";
 						$ds=mysql_query($q);
 
 						while($r = mysql_fetch_object($ds))
 						{
-							echo "['".$r->timestamp."', ";
+							echo "['".$r->time."', ";
 							echo " ".$r->light." ],";
 
 						}
