@@ -1,8 +1,8 @@
 <?php
 
-	require 'timings.php';
-	require 'grow_settings.php';
-	require 'sensor.php';
+	require_once 'timings.php';
+	require_once 'grow_settings.php';
+	require_once 'sensor.php';
 
 	if (MODE == MODE_AUTO) {
 
