@@ -49,6 +49,36 @@ function readSerial() {
 	return;
 }
 
+function getGrowTemp() {
+	$servername = "localhost";
+	$username = "datalogger";
+	$password = "datalogger";
+	$dbname = "datalogger";
+
+	// Create connection
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	// Check connection
+	if (!$conn) {
+			die("Connection failed: " . mysqli_connect_error());
+	}
+
+	$sql = "SELECT roomtemp FROM light_and_roomtemp LIMIT 1";
+	$result = mysqli_query($conn, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+			// output data of each row
+			while($row = mysqli_fetch_assoc($result)) {
+					$grow_temp = $row["roomtemp"];
+					mysqli_close($conn);
+					return $grow_temp;
+			}
+	} else {
+			mysqli_close($conn);
+			return -1;
+	}
+}
+
+
 readSensor(4);
 readSerial();
 ?>

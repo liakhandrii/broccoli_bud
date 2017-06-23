@@ -6,6 +6,9 @@ date_default_timezone_set("Europe/Kiev");
 
 # pin_number => [on time, off time]
 
+	define("SYSTEM_ON_TIME", 5);
+	define("SYSTEM_OFF_TIME", 22);
+
 	$veg_timings = array(
 		WARM_LED => array(5, 6),
 		COLD_LED => array(6, 22),
@@ -24,6 +27,5 @@ date_default_timezone_set("Europe/Kiev");
 	if (CYCLE == FLOWERING) {
 		$timings = $flower_timings;
 	}
-	
-?>
 
+?>
