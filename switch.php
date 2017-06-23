@@ -31,9 +31,9 @@
 
 			}
 
-			// $grow_temp = getGrowTemp();
-			// echo($grow_temp);
-			//
+			$grow_temp = getGrowTemp();
+			echo($grow_temp);
+			
 			// if (SYSTEM_ON_TIME == -1 || SYSTEM_OFF_TIME == -1) {
 			//
 			// } elseif (SYSTEM_ON_TIME < $off_time) {
