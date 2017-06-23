@@ -342,7 +342,7 @@ while($r = mysql_fetch_object($ds))
 							hAxis: { textPosition: 'none', direction: '-1' },
 						        };
 
-						        var chart = new google.visualization.LineChart(document.getElementById('plotgrowtemp_div'));
+						        var chart = new google.visualization.LineChart(document.getElementById('plotligth_div'));
 
 						        chart.draw(data, options);
 						      }
@@ -424,13 +424,12 @@ while($r = mysql_fetch_object($ds))
 </div>
 <div class="container">
     <div id="chart2_div" style="width: auto; height: 500px;"></div>
-    <div id="chart_div" style="width: auot; height: 500px;"></div><hr>
-    <?php include 'footer.php';?>
+    <div id="chart_div" style="width: auto; height: 500px;"></div><hr>
 </div>
 <hr>
 <div class="container">
     <div id="plotligth_div" style="width: auto; height: 500px;"></div>
-    <div id="plotgrowtemp_div" style="width: auot; height: 500px;"></div><hr>
+    <div id="plotgrowtemp_div" style="width: auto; height: 500px;"></div><hr>
     <?php include 'footer.php';?>
 </div>
 </body>
