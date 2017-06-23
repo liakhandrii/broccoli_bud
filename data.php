@@ -147,7 +147,7 @@ mysqli_close($conn);
 				    die("Connection failed: " . mysqli_connect_error());
 				}
 
-				$sql = "SELECT roomtemp FROM light_and_roomtemp LIMIT 1";
+				$sql = "SELECT light FROM light_and_roomtemp LIMIT 1";
 				$result = mysqli_query($conn, $sql);
 
 				if (mysqli_num_rows($result) > 0) {
