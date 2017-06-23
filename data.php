@@ -13,7 +13,7 @@ require_once("./include/membersite_config.php");
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
-<!-- VIV 1 TEMP GAUGE -->
+<!-- VIV 1 ROOM TEMP GAUGE -->
 
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["gauge"]});
@@ -48,7 +48,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 mysqli_close($conn);
-?> 
+?>
 
 ],
 
@@ -68,6 +68,62 @@ mysqli_close($conn);
 
       }
     </script>
+
+		<!-- VIV 1 INSIDE TEMP GAUGE -->
+
+		    <script type="text/javascript">
+		      google.load("visualization", "1", {packages:["gauge"]});
+		      google.setOnLoadCallback(drawChart);
+		      function drawChart() {
+
+		        var data = google.visualization.arrayToDataTable([
+		          ['Label', 'Value'],
+		          ['TEMP C', <?php
+		$servername = "localhost";
+		$username = "datalogger";
+		$password = "datalogger";
+		$dbname = "datalogger";
+
+		// Create connection
+		$conn = mysqli_connect($servername, $username, $password, $dbname);
+		// Check connection
+		if (!$conn) {
+		    die("Connection failed: " . mysqli_connect_error());
+		}
+
+		$sql = "SELECT roomtemp FROM light_and_roomtemp LIMIT 1";
+		$result = mysqli_query($conn, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+		    // output data of each row
+		    while($row = mysqli_fetch_assoc($result)) {
+		        echo $row["roomtemp"];
+		    }
+		} else {
+		    echo "0 results";
+		}
+
+		mysqli_close($conn);
+		?>
+
+		],
+
+		        ]);
+
+		        var options = {
+		          width: 400, height: 200,
+		          redFrom: 26.6, redTo: 100,
+		          yellowFrom:20, yellowTo: 25.5,
+		          minorTicks: 5
+		        };
+
+		        var chart = new google.visualization.Gauge(document.getElementById('charttemp_div'));
+
+		        chart.draw(data, options);
+
+
+		      }
+		    </script>
 
 <!-- VIV 1 HUM GAUGE -->
     <script type="text/javascript">
@@ -128,23 +184,23 @@ mysqli_close($conn);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['TIME', 'HUMIDITY', ],
-<?php 
-$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error"); 
-mysql_select_db("datalogger"); 
+<?php
+$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error");
+mysql_select_db("datalogger");
 
-$q=   "select * from datalogger "; 
-$q=$q."where sensor = ".$_GET["sensor"]." "; 
-$q=$q."order by date_time desc "; 
-$q=$q."limit 60"; 
-$ds=mysql_query($q);  
+$q=   "select * from datalogger ";
+$q=$q."where sensor = ".$_GET["sensor"]." ";
+$q=$q."order by date_time desc ";
+$q=$q."limit 60";
+$ds=mysql_query($q);
 
-while($r = mysql_fetch_object($ds)) 
-{ 
-	echo "['".$r->date_time."', "; 
-	echo " ".$r->humidity." ],"; 
+while($r = mysql_fetch_object($ds))
+{
+	echo "['".$r->date_time."', ";
+	echo " ".$r->humidity." ],";
 
-} 
-?> 
+}
+?>
         ]);
 
 	var options = {
@@ -168,23 +224,23 @@ while($r = mysql_fetch_object($ds))
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['TIME', 'TEMP', ],
-<?php 
-$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error"); 
-mysql_select_db("datalogger"); 
+<?php
+$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error");
+mysql_select_db("datalogger");
 
-$q=   "select * from datalogger "; 
-$q=$q."where sensor = ".$_GET["sensor"]." "; 
-$q=$q."order by date_time desc "; 
-$q=$q."limit 60"; 
-$ds=mysql_query($q); 
+$q=   "select * from datalogger ";
+$q=$q."where sensor = ".$_GET["sensor"]." ";
+$q=$q."order by date_time desc ";
+$q=$q."limit 60";
+$ds=mysql_query($q);
 
-while($r = mysql_fetch_object($ds)) 
-{ 
-	echo "['".$r->date_time."', "; 
-	echo " ".$r->temperature." ],"; 
+while($r = mysql_fetch_object($ds))
+{
+	echo "['".$r->date_time."', ";
+	echo " ".$r->temperature." ],";
 
-} 
-?> 
+}
+?>
         ]);
 
 	var options = {
