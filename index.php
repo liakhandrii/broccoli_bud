@@ -4,7 +4,7 @@ require_once("./include/membersite_config.php");
 
 if(!$fgmembersite->CheckLogin())
 {
-    $fgmembersite->RedirectToURL("login.php");
+    $fgmembersite->RedirectToURL("1.php");
     exit;
 }
 ?>
@@ -52,7 +52,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 mysqli_close($conn);
-?> 
+?>
 
 ],
 
@@ -157,7 +157,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 mysqli_close($conn);
-?> 
+?>
 
 ],
 
@@ -238,23 +238,23 @@ mysqli_close($conn);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['TIME', 'HUMIDITY', ],
-<?php 
-$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error"); 
-mysql_select_db("datalogger"); 
+<?php
+$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error");
+mysql_select_db("datalogger");
 
-$q=   "select * from history "; 
-$q=$q."where sensor = ".$sensor." "; 
-$q=$q."order by date_time desc "; 
-$q=$q."limit 24"; 
-$ds=mysql_query($q);  
+$q=   "select * from history ";
+$q=$q."where sensor = ".$sensor." ";
+$q=$q."order by date_time desc ";
+$q=$q."limit 24";
+$ds=mysql_query($q);
 
-while($r = mysql_fetch_object($ds)) 
-{ 
-	echo "['".$r->date_time."', "; 
-	echo " ".$r->humidity." ],"; 
+while($r = mysql_fetch_object($ds))
+{
+	echo "['".$r->date_time."', ";
+	echo " ".$r->humidity." ],";
 
-} 
-?> 
+}
+?>
         ]);
 
 	var options = {
@@ -279,23 +279,23 @@ options['pagingSymbols'] = {prev: 'prev', next: 'next'}; options['pagingButtonsC
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['TIME', 'TEMP', ],
-<?php 
-$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error"); 
-mysql_select_db("datalogger"); 
+<?php
+$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error");
+mysql_select_db("datalogger");
 
-$q=   "select * from history "; 
-$q=$q."where sensor = ".$sensor." "; 
-$q=$q."order by date_time desc "; 
-$q=$q."limit 24"; 
-$ds=mysql_query($q); 
+$q=   "select * from history ";
+$q=$q."where sensor = ".$sensor." ";
+$q=$q."order by date_time desc ";
+$q=$q."limit 24";
+$ds=mysql_query($q);
 
-while($r = mysql_fetch_object($ds)) 
-{ 
-	echo "['".$r->date_time."', "; 
-	echo " ".$r->temperature." ],"; 
+while($r = mysql_fetch_object($ds))
+{
+	echo "['".$r->date_time."', ";
+	echo " ".$r->temperature." ],";
 
-} 
-?> 
+}
+?>
         ]);
 
 	var options = {
@@ -361,6 +361,5 @@ while($r = mysql_fetch_object($ds))
 </div>
 <div class="container"><hr>
 <?php include 'footer.php';?></div>
-</BODY> 
+</BODY>
 </HTML>
-
