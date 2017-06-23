@@ -12,8 +12,8 @@
 	define("FAN", 28);
 	define("PUMP", 29);
 
-	define("MAX_TEMP", 32);
-	define("MIN_TEMP", 22);
+	define("MAX_TEMP", 32.0);
+	define("MIN_TEMP", 22.0);
 
 	# twice a day
 	define("WATERINGS_PER_DAY", 8);
