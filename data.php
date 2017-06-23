@@ -233,7 +233,7 @@ mysqli_close($conn);
 
       }
     </script>
-<!-- VIV 1 HUM GRAPH -->
+<!-- ROOM HUM GRAPH -->
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
@@ -272,7 +272,83 @@ while($r = mysql_fetch_object($ds))
       }
     </script>
 
-<!-- VIV 1 TEMP GRAPH -->
+<!-- GROWBOX TEMP GRAPH -->
+		    <script type="text/javascript">
+		      google.load("visualization", "1", {packages:["corechart"]});
+		      google.setOnLoadCallback(drawChart);
+		      function drawChart() {
+		        var data = google.visualization.arrayToDataTable([
+		          ['TIME', 'HUMIDITY', ],
+		<?php
+		$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error");
+		mysql_select_db("datalogger");
+
+		$q=   "select * from light_and_roomtemp ";
+		$q=$q."order by date_time desc ";
+		$q=$q."limit 1440";
+		$ds=mysql_query($q);
+
+		while($r = mysql_fetch_object($ds))
+		{
+			echo "['".$r->date_time."', ";
+			echo " ".$r->roomtemp." ],";
+
+		}
+		?>
+		        ]);
+
+			var options = {
+			title: 'GROWBOX TEMP LAST DAY',
+			curveType: 'function',
+			legend: { position: 'none' },
+			hAxis: { textPosition: 'none', direction: '-1' },
+		        };
+
+		        var chart = new google.visualization.LineChart(document.getElementById('plotgrowtemp_div'));
+
+		        chart.draw(data, options);
+		      }
+		    </script>
+
+				<!-- GROWBOX LIGHT GRAPH -->
+						    <script type="text/javascript">
+						      google.load("visualization", "1", {packages:["corechart"]});
+						      google.setOnLoadCallback(drawChart);
+						      function drawChart() {
+						        var data = google.visualization.arrayToDataTable([
+						          ['TIME', 'HUMIDITY', ],
+						<?php
+						$db = mysql_connect("localhost","datalogger","datalogger") or die("DB Connect error");
+						mysql_select_db("datalogger");
+
+						$q=   "select * from light_and_roomtemp ";
+						$q=$q."order by date_time desc ";
+						$q=$q."limit 1440";
+						$ds=mysql_query($q);
+
+						while($r = mysql_fetch_object($ds))
+						{
+							echo "['".$r->date_time."', ";
+							echo " ".$r->light." ],";
+
+						}
+						?>
+						        ]);
+
+							var options = {
+							title: 'LIGHT INTENSITY LAST DAY',
+							curveType: 'function',
+							legend: { position: 'none' },
+							hAxis: { textPosition: 'none', direction: '-1' },
+						        };
+
+						        var chart = new google.visualization.LineChart(document.getElementById('plotgrowtemp_div'));
+
+						        chart.draw(data, options);
+						      }
+						    </script>
+
+<!-- ROOM TEMP GRAPH -->
 
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -300,7 +376,7 @@ while($r = mysql_fetch_object($ds))
         ]);
 
 	var options = {
-	title: 'ROOM TEMP LAST HOUR',
+	title: 'ROOM TEMP LAST DAY',
 	curveType: 'function',
 	legend: { position: 'none' },
 	hAxis: { textPosition: 'none', direction: '-1' },
@@ -349,6 +425,12 @@ while($r = mysql_fetch_object($ds))
 <div class="container">
     <div id="chart2_div" style="width: auto; height: 500px;"></div>
     <div id="chart_div" style="width: auot; height: 500px;"></div><hr>
+    <?php include 'footer.php';?>
+</div>
+<hr>
+<div class="container">
+    <div id="plotligth_div" style="width: auto; height: 500px;"></div>
+    <div id="plotgrowtemp_div" style="width: auot; height: 500px;"></div><hr>
     <?php include 'footer.php';?>
 </div>
 </body>
