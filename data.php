@@ -284,13 +284,13 @@ while($r = mysql_fetch_object($ds))
 		mysql_select_db("datalogger");
 
 		$q=   "select * from light_and_roomtemp ";
-		$q=$q."order by date_time desc ";
+		$q=$q."order by timestamp desc ";
 		$q=$q."limit 1440";
 		$ds=mysql_query($q);
 
 		while($r = mysql_fetch_object($ds))
 		{
-			echo "['".$r->date_time."', ";
+			echo "['".$r->timestamp."', ";
 			echo " ".$r->roomtemp." ],";
 
 		}
@@ -322,13 +322,13 @@ while($r = mysql_fetch_object($ds))
 						mysql_select_db("datalogger");
 
 						$q=   "select * from light_and_roomtemp ";
-						$q=$q."order by date_time desc ";
+						$q=$q."order by timestamp desc ";
 						$q=$q."limit 1440";
 						$ds=mysql_query($q);
 
 						while($r = mysql_fetch_object($ds))
 						{
-							echo "['".$r->date_time."', ";
+							echo "['".$r->timestamp."', ";
 							echo " ".$r->light." ],";
 
 						}
